@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Permanent+Marker&family=Roboto+Condensed:wght@100..900&family=Special+Elite&display=swap');
 
 :root {
+  /* Buttons, Menus, Perk Descriptions, Player Stats */
   font-family: 'Roboto Condensed', sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -13,4 +14,21 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- FONTS --- */
+/* The "Story" elements, journal entries, or the "About" page */
+.special-elite {
+  font-family: 'Special Elite', sans-serif;
+}
+/* Big status indicators like "DEAD", "ESCAPED", or "SACRIFICED" */
+.oswald {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+}
+/* Annotations or "crossing out" a dead character */
+.scribble {
+  font-family: 'Scribble', sans-serif;
+  text-transform: uppercase;
+  color: #FF0000;
 }
