@@ -1,3 +1,38 @@
+:root {
+    --text-muted: #CCC;
+}
+
 main {
-    background-color: #0B0B0B;
+    background: url('assets/woods_background.png') center no-repeat;
+    background-size: cover;
+    max-height: 100vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-muted);
+}
+
+/* User Profile has application title and the season preview */
+.userProfile {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+.seasonPreviewCardContainer {
+    width: 80vw;
+    justify-self: center;
+}
+
+/* Season preview card is the single card styles within the SeasonPreviewCard.tsx file */
+.seasonPreviewCard {
+    margin: 20px 0;
+}
+/* GLOBAl Card styles : can be used for any clickable card such as seasons, matches, etc */
+.dbdCard {
+    padding: 20px;
+    background-color: rgba(18, 18, 18, 0.85);
+    color: var(--text-muted);
+    box-shadow: -8px 6px 3px rgba(0, 0, 0, 0.6);
 }

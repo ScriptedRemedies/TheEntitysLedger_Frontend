@@ -1,6 +1,6 @@
 import {API_BASE_URL} from "../config/api.ts";
-import type {KillerModel} from "../models/KillerModel.ts";
-import type {SurvivorModel} from "../models/SurvivorModel.ts";
+import type {SeasonModel} from "../models/SeasonModel.ts";
+import type {UserModel} from "../models/UserModel.ts";
 
 // Handles repetitive "check response.ok" and "parse json"
 async function request<T>(endpoint: string): Promise<T> {
@@ -16,16 +16,13 @@ async function request<T>(endpoint: string): Promise<T> {
 // Backend API - functions the components will call
 export const BackendService = {
 
-    // FETCH ALL KILLERS
-    getAllKillers: () => request<KillerModel[]>('/killers'),
+    // FETCH USER INFO
+    getUser: (userId: number) => request<UserModel>(`/users/${userId}`),
 
-    // FETCH ALL SURVIVORS
-    getAllSurvivors: () => request<SurvivorModel[]>('/survivors'),
+    // FETCH USER SEASONS
+    getUserSeasons: (userId: number) => request<SeasonModel[]>(`/seasons/users/${userId}`),
 
-    // FETCH USER SEASONS (Example for later)
-    getUserSeasons: (userId: number) => request<never[]>(`/users/${userId}/seasons`),
-
-    // CREATE A MATCH (Example of a POST request)
+    // CREATE A MATCH
     createMatch: async (matchData: never) => {
         const response = await fetch(`${API_BASE_URL}/matches`, {
             method: 'POST',

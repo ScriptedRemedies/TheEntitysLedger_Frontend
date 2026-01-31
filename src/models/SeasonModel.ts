@@ -2,11 +2,16 @@ export interface SeasonModel {
     userId: number;
     id: number;
     playerRole: string; // Either Killer or Survivor
-    variant: SeasonVariant;
+    playerName: string;
+    platform: string;
+
+    variantId: string;
 
     matches: [];
     badge: string;
     pip: number;
+
+    isCurrent: boolean;
 }
 
 export interface SeasonVariant {
@@ -144,7 +149,7 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
     },
     {
         id: 'BASE_GAME',
-        name: 'F2P / Base Game',
+        name: 'Base Game',
         description: 'A shorter challenge using only the original 5 Killers.',
         difficulty: 'NORMAL',
         rules: [
