@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import {BackendService} from '../services/backend.ts';
 import {SEASON_VARIANTS, type SeasonModel} from "../models/SeasonModel.ts";
+import {PlayerGrades} from '../models/PlayerGrades.ts';
 
 // Defining what props will be accepted
 interface SeasonProps {
@@ -14,6 +16,9 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
     // STATE : hold any errors
     const [error, setError] = useState('');
 
+    // Initialize the router hook
+    const navigate = useNavigate();
+
     // Grab seasons with user info on page load
     useEffect(() => {
         BackendService.getUserSeasons(userId)
@@ -21,8 +26,8 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                 // Sorting seasons by isCurrent first then by newest creation date
                 const sortedSeasons = data.sort((a, b) => {
                     // If a isCurrent then it should be first
-                    if (a.isCurrent === true) return -1;
-                    if (b.isCurrent === true) return 1;
+                    if (a.isCurrent) return -1;
+                    if (b.isCurrent) return 1;
 
                     return b.id - a.id;
                 });
@@ -47,14 +52,25 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                 const variantInfo = SEASON_VARIANTS.find(v => v.id === season.variantId);
                 const variantDisplayName = variantInfo ? variantInfo.name : season.variantId;
 
+                // Getting the grade image url
+                const gradeImageUrl = PlayerGrades.getGradeImageFromPips(season.pip, season.playerRole);
+                // Getting the grade name
+                const gradeName = PlayerGrades.getGradeNameFromPips(season.pip);
+
                 return (
-                    <div key={season.id} className="seasonPreviewCard dbdCard cardHover">
+                    <div key={season.id} className="seasonPreviewCard dbdCard cardHover" onClick={() => navigate(`/season/${season.id}`)}>
                         <h4>{variantDisplayName}</h4>
+                        <p>{season.platform}</p>
+                        <div className="grade">
+                            <p className="englishSC">{PlayerGrades.getRomanGradeName(season.pip)}</p>
+                            <img src={gradeImageUrl} alt={gradeName}/>
+                        </div>
+
                         <p>{season.playerRole}</p>
                         <p>{season.playerName}</p>
-                        <p>{season.platform}</p>
-                        <p>{season.badge}</p>
-                        <p>{season.pip}</p>
+                        <p>{PlayerGrades.getGradeNameFromPips(season.pip)}</p>
+
+                        <p>Matches Played: {season.matches?.length || 0}</p>
                         {season.isCurrent ? (
                             <p>Current Season</p>
                         ) : (
@@ -64,6 +80,7 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                                 <p className="oswald">FAILED</p>
                             )
                         )}
+                        <p>Total Pips: {season.pip}</p>
                     </div>
                 )
             })}

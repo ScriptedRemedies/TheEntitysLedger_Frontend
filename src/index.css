@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Permanent+Marker&family=Roboto+Condensed:wght@100..900&family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Oswald:wght@200..700&family=Permanent+Marker&family=Roboto+Condensed:wght@100..900&family=Special+Elite&display=swap');
 
 :root {
   /* Buttons, Menus, Perk Descriptions, Player Stats */
@@ -11,7 +11,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --red: #FF0000;
+  --red: #951314;
 }
 
 /* --- FONTS --- */
@@ -30,4 +30,9 @@
   font-family: 'Scribble', sans-serif;
   text-transform: uppercase;
   color: var(--red);
+}
+/* For the roman numerals */
+.englishSC {
+  font-family: 'IM Fell English SC', sans-serif;
+  text-transform: uppercase;
 }

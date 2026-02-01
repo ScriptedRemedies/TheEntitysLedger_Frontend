@@ -3,8 +3,9 @@
 }
 
 main {
-    background: url('assets/woods_background.png') center no-repeat;
+    background: url('../public/assets/woods_background.png') center no-repeat;
     background-size: cover;
+    min-height: 100vh;
     max-height: 100vh;
     overflow: auto;
     display: flex;
@@ -12,8 +13,8 @@ main {
     color: var(--text-muted);
 }
 
-/* User Profile has application title and the season preview */
-.userProfile {
+/* GLOBAL Styles for the entire component containers */
+.componentContainer {
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -30,6 +31,21 @@ main {
 /* Season preview card is the single card styles within the SeasonPreviewCard.tsx file */
 .seasonPreviewCard {
     margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+.seasonPreviewCard > *:nth-child(3n+1) {
+    justify-self: start;
+    text-align: left;
+}
+.seasonPreviewCard > *:nth-child(3n+2) {
+    justify-self: center;
+    text-align: center;
+}
+.seasonPreviewCard > *:nth-child(3n) {
+    justify-self: end;
+    text-align: right;
 }
 /* GLOBAL button styles : can be used for any buttons */
 .dbdButton {
@@ -101,5 +117,31 @@ main {
                 20px 2px, 2px 20px, /* Bottom Right */
                 20px 2px, 2px 20px; /* Bottom Left */
         color: white;
+    }
+}
+/* GLOBAL Grade styles : used specifically for the grade image and roman number */
+.grade {
+    position: relative;
+    width: fit-content;
+
+    img {
+        display: block;
+        height: 80px;
+        width: auto;
+    }
+    p {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+        z-index: 10;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow:
+            2px 2px 0 #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
     }
 }
