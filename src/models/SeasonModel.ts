@@ -12,6 +12,7 @@ export interface SeasonModel {
     pip: number;
 
     isCurrent: boolean;
+    result: string;
 }
 
 export interface SeasonVariant {

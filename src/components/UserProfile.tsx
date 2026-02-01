@@ -29,6 +29,7 @@ export const UserProfile = () => {
         <div className="userProfile">
             <h2 className="special-elite">Hello {user.name}, the Entity awaits...</h2>
             <div className="seasonPreviewCardContainer">
+                <button className="dbdButton">Start New Season</button>
                 <SeasonPreviewCard userId={user.id}/>
             </div>
         </div>

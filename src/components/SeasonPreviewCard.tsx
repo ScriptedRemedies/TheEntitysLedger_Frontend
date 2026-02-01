@@ -18,7 +18,16 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
     useEffect(() => {
         BackendService.getUserSeasons(userId)
             .then(data => {
-                setSeasons(data);
+                // Sorting seasons by isCurrent first then by newest creation date
+                const sortedSeasons = data.sort((a, b) => {
+                    // If a isCurrent then it should be first
+                    if (a.isCurrent === true) return -1;
+                    if (b.isCurrent === true) return 1;
+
+                    return b.id - a.id;
+                });
+
+                setSeasons(sortedSeasons);
             })
             .catch(() => {
                 setError("Failed to load seasons.");
@@ -30,7 +39,7 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
     if (!userId) return <div className="loadingScreen">Loading User Data...</div>
     if (!seasons) return <div className="loadingScreen">Loading Seasons...</div>
 
-    // RENDER : show data if we have it
+    // RENDER
     return (
         <div>
             {seasons.map(season => {
@@ -39,7 +48,7 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                 const variantDisplayName = variantInfo ? variantInfo.name : season.variantId;
 
                 return (
-                    <div key={season.id} className="seasonPreviewCard dbdCard">
+                    <div key={season.id} className="seasonPreviewCard dbdCard cardHover">
                         <h4>{variantDisplayName}</h4>
                         <p>{season.playerRole}</p>
                         <p>{season.playerName}</p>
@@ -49,8 +58,11 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                         {season.isCurrent ? (
                             <p>Current Season</p>
                         ) : (
-                            // Need to update back and front end to accept a "result" field for when the season is finished
-                            <p className="oswald">PASSED</p>
+                            season.result === "PASSED" ? (
+                                <p className="oswald">PASSED</p>
+                            ) : (
+                                <p className="oswald">FAILED</p>
+                            )
                         )}
                     </div>
                 )
