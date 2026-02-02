@@ -61,9 +61,7 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                     <div
                         key={season.id}
                         className="seasonPreviewCard dbdCard cardHover"
-                        onClick={() => {
-                            navigate(`/season/${season.id}`, { state: {seasonData: season} })
-                        }}>
+                        onClick={() => {navigate(`/season/${season.id}`)}}>
                         <h4>{variantDisplayName}</h4>
                         <p>{season.platform}</p>
                         <div className="grade">

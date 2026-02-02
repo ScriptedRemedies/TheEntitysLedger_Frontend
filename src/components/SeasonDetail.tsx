@@ -18,7 +18,7 @@ export const SeasonDetail = () => {
         <div className="seasonDetailContainer componentContainer">
             <h1>Season Details</h1>
             <p>{user.id}</p>
-            <button className="dbdButton" onClick={() => navigate(-1)}>Back</button>
+            <button className="button dbdButton" onClick={() => navigate(-1)}>Back</button>
         </div>
     )
 }

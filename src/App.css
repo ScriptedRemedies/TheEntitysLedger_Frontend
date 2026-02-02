@@ -47,15 +47,22 @@ main {
     justify-self: end;
     text-align: right;
 }
-/* GLOBAL button styles : can be used for any buttons */
-.dbdButton {
+/* GLOBAL button styles : used for every button */
+.button {
     width: fit-content;
-    align-self: center;
     padding: 10px;
     text-align: right;
     cursor: pointer;
     color: var(--text-muted);
     border: none;
+
+    &:hover {
+        color: white;
+    }
+}
+/* GLOBAL button styles : can be used for any buttons */
+.dbdButton {
+    align-self: center;
     border-right: 2px solid var(--red);
     background-color: transparent;
     background-image:
@@ -69,9 +76,73 @@ main {
     transition: background-size 0.4s ease-out, color 0.3s ease;
 
     &:hover {
-        color: white;
         background-size: 100% 100%, 100% 100%;
     }
+}
+.form {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+/* GLOBAL form styles : for any forms */
+.dbdFormGroup {
+
+}
+/* GLOBAL input button container : used for the container of any group of buttons on forms */
+.inputButtonsContainer {
+    display: flex;
+    gap: 20px;
+}
+/* Specific to the variant button container */
+.variantContainer {
+
+}
+/* GLOBAL button styles : used for input button on forms */
+.dbdInputButton {
+    box-shadow: -4px 3px 3px rgba(0, 0, 0, 0.6);
+    background-color: #070809;
+    background-image:
+        /* Top Left (Horizontal, Vertical) */
+            linear-gradient(white, white), linear-gradient(white, white),
+                /* Top Right */
+            linear-gradient(white, white), linear-gradient(white, white),
+                /* Bottom Right */
+            linear-gradient(white, white), linear-gradient(white, white),
+                /* Bottom Left */
+            linear-gradient(white, white), linear-gradient(white, white);
+    background-repeat: no-repeat;
+    background-position:
+            0 0, 0 0,           /* Top Left */
+            100% 0, 100% 0,     /* Top Right */
+            100% 100%, 100% 100%, /* Bottom Right */
+            0 100%, 0 100%;     /* Bottom Left */
+    background-size:
+            0 2px, 2px 0,  /* Top Left */
+            0 2px, 2px 0,  /* Top Right */
+            0 2px, 2px 0,  /* Bottom Right */
+            0 2px, 2px 0;  /* Bottom Left */
+    transition:
+            background-size 0.3s ease-out,
+            transform 0.2s ease-in-out,
+            border-color 0.3s ease;
+
+    img {
+        width: 80px;
+    }
+}
+.dbdInputButton:hover, .selectedButton {
+    background-color: rgba(0, 0, 0, 0.90);
+    background-size:
+            25% 2px, 2px 25%, /* Top Left */
+            25% 2px, 2px 25%, /* Top Right */
+            25% 2px, 2px 25%, /* Bottom Right */
+            25% 2px, 2px 25%; /* Bottom Left */
+    color: white;
+}
+/* GLOBAL input styles : used for text input on forms */
+.dbdInput {
+
 }
 /* GLOBAl Card styles : can be used for any clickable card such as seasons, matches, etc */
 .dbdCard {

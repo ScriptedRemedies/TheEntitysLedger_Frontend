@@ -1,5 +1,5 @@
 import {API_BASE_URL} from "../config/api.ts";
-import type {SeasonModel} from "../models/SeasonModel.ts";
+import type {SeasonModel, CreateSeasonRequest} from "../models/SeasonModel.ts";
 import type {UserModel} from "../models/UserModel.ts";
 
 // Handles repetitive "check response.ok" and "parse json"
@@ -24,6 +24,17 @@ export const BackendService = {
 
     // FETCH A SINGLE SEASON BY ID
     getSeasonById: (seasonId: string) => request<SeasonModel>(`/seasons/${seasonId}`),
+
+    // START A SEASON
+    startSeason: async (seasonData: CreateSeasonRequest) => {
+        const response = await fetch(`${API_BASE_URL}/seasons`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(seasonData)
+        })
+        if (!response.ok) throw new Error('Failed to start season');
+        return response.json();
+    },
 
     // CREATE A MATCH
     createMatch: async (matchData: never) => {

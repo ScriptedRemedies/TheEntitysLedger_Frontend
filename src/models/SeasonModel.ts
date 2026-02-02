@@ -14,6 +14,13 @@ export interface SeasonModel {
     isCurrent: boolean;
     result: string;
 }
+export interface CreateSeasonRequest {
+    userId: number;
+    variantId: string;
+    playerRole: string;
+    platform: string;
+    playerName: string;
+}
 
 export interface SeasonVariant {
     readonly id: string;
