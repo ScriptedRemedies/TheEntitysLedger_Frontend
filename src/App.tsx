@@ -1,20 +1,32 @@
 import './App.css'
 import {UserProfile} from "./components/UserProfile.tsx";
-import {Route, Routes} from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {SeasonDetail} from "./components/SeasonDetail.tsx";
+import {RootLayout} from "./components/RootLayout.tsx";
+import {rootLoader, seasonLoader} from "./config/loaders.ts";
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <RootLayout />,
+        loader: rootLoader,
+        children: [
+            {
+                index: true, // "Default page"
+                element: <UserProfile />
+            },
+            {
+                path: "season/:id",
+                element: <SeasonDetail />,
+                loader: seasonLoader
+            }
+        ]
+    }
+]);
 
 function App() {
-    const userId = 1;
 
-  return (
-    <main>
-        <h1>The Entity's Ledger</h1>
-        <Routes>
-            <Route path="/" element={<UserProfile userId={userId} />} />
-            <Route path="/season/:id" element={<SeasonDetail />} />
-        </Routes>
-    </main>
-  )
+  return <RouterProvider router={router} />;
 }
 
 export default App

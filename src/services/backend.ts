@@ -22,6 +22,9 @@ export const BackendService = {
     // FETCH USER SEASONS
     getUserSeasons: (userId: number) => request<SeasonModel[]>(`/seasons/users/${userId}`),
 
+    // FETCH A SINGLE SEASON BY ID
+    getSeasonById: (seasonId: string) => request<SeasonModel>(`/seasons/${seasonId}`),
+
     // CREATE A MATCH
     createMatch: async (matchData: never) => {
         const response = await fetch(`${API_BASE_URL}/matches`, {

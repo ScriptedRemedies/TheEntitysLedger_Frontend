@@ -58,7 +58,12 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                 const gradeName = PlayerGrades.getGradeNameFromPips(season.pip);
 
                 return (
-                    <div key={season.id} className="seasonPreviewCard dbdCard cardHover" onClick={() => navigate(`/season/${season.id}`)}>
+                    <div
+                        key={season.id}
+                        className="seasonPreviewCard dbdCard cardHover"
+                        onClick={() => {
+                            navigate(`/season/${season.id}`, { state: {seasonData: season} })
+                        }}>
                         <h4>{variantDisplayName}</h4>
                         <p>{season.platform}</p>
                         <div className="grade">
