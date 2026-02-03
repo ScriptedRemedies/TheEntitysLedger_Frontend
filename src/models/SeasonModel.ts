@@ -51,17 +51,19 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
     {
         id: 'CLASSIC',
         name: 'The Classic',
-        description: 'The standard Nuzlocke experience. Climb from Ash to Iridescent.',
-        difficulty: 'NORMAL',
+        description: 'Reach Iridescent 1 rank before running out of killers.',
+        difficulty: 'HARD',
         rules: [
-            'Permadeath: If you lose, the character is dead forever.',
-            'Win Condition: 3 Kills + Hatch Escape OR 4 Kills.',
-            'Load out: Unlock 1 Perk Slot per Grade Color (Ash=1, Bronze=2, etc.).',
-            'Roster: Full access to all characters owned.'
+            'No perks... No Add-ons... No Offerings.',
+            'A win is achieving at least 3 kills in a match.',
+            'A loss is if one or more survivors escape.',
+            'Full access to all characters owned.',
+            'If the match is a loss, the specific killer used is "gone forever" from the challenge and cannot be used again in the season.',
+            'Game tactics such as tunneling and slugging are allowed.'
         ],
         features: {
             hasShop: false,
-            hasRandomizer: false, // Standard selection screen
+            hasRandomizer: false,
             permaDeath: true,
             winCondition: 'STANDARD_3K'
         }
