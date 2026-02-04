@@ -23,7 +23,7 @@ export const startSeasonAction = async ({ request }: { request: Request }) => {
         case 'BLOOD_MONEY':
             variantSettings = {
                 // We grab the input named "custom_difficulty" from BloodMoney.tsx
-                startingCurrency: formData.get("custom_difficulty") === 'hardcore' ? 0 : 500
+                startingCurrency: formData.get("custom_difficulty") === 'hardcore' ? 0 : 50
             };
             break;
 
