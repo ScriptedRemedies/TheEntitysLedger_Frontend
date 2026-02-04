@@ -2,14 +2,14 @@ import {RosterSelector} from "../RosterSelector.tsx";
 import {KILLER_ROSTER} from "../../models/GameData.ts";
 import {useState} from "react";
 
-export const Classic = () => {
+export const IronMan = () => {
     const [roster, setRoster] = useState<string[]>(KILLER_ROSTER.map(k => k.id));
     return (
         <div>
             {/* Silently send the roster list */}
             <input type="hidden" name="startingRoster" value={JSON.stringify(roster)}/>
 
-            <h3>Classic Options</h3>
+            <h3>Iron Man Options</h3>
             <div className="dbdFormGroup">
                 <RosterSelector selectedIds={roster} onChange={setRoster} />
             </div>

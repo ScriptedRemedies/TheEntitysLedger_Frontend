@@ -4,10 +4,18 @@ import {useState} from "react";
 import {SEASON_VARIANTS} from "../models/SeasonModel.ts";
 import {BloodMoney} from "./variants/BloodMoney.tsx";
 import {Classic} from "./variants/Classic.tsx";
+import {Roulette} from "./variants/Roulette.tsx";
+import {IronMan} from "./variants/IronMan.tsx";
+import {Adept} from "./variants/Adept.tsx";
+import {BaseGame} from "./variants/BaseGame.tsx";
 
 const VARIANT_VIEWS: Record<string, React.FC> = {
     'CLASSIC': Classic,
-    'BLOOD_MONEY': BloodMoney
+    'ADEPT_HARDCORE': Adept,
+    'BASE_GAME': BaseGame,
+    'BLOOD_MONEY': BloodMoney,
+    'ROULETTE': Roulette,
+    'IRON_MAN': IronMan
 }
 
 export const StartSeason = () => {
@@ -135,18 +143,18 @@ export const StartSeason = () => {
                         <div className="dbdCard">
                             <div>
                                 <h3>{activeVariantInfo.name}</h3>
-                                <p>{activeVariantInfo.difficulty}</p>
+                                <p className="oswald">{activeVariantInfo.difficulty}</p>
                                 <p>{activeVariantInfo.description}</p>
-                                <ul>
+                                <ol>
                                     {activeVariantInfo.rules.map((rule, index) => (
                                         <li key={index}>{rule}</li>
                                     ))}
-                                </ul>
+                                </ol>
                             </div>
                         </div>
 
                         {/* Season Variant Options */}
-                        <div className="variantOptionsContainer" style={{ marginTop: '20px' }}>
+                        <div className="variantOptionsContainer">
 
                             {/* Render the specific component for the selected variant */}
                             {ActiveVariantComponent && <ActiveVariantComponent />}

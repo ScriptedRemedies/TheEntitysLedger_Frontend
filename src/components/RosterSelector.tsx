@@ -19,10 +19,11 @@ export const RosterSelector = ({ selectedIds, onChange }: RosterSelectorProps) =
 
     return (
         <div className="rosterSelectorContainer">
-            <p>Deselect any characters you do not have access to.</p>
+            {/* Disclaimer */}
+            <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span style={{ fontStyle: 'italic' }}>Either you haven't bought the character yet, or DBD disabled them.</span></p>
             {/* Select and deselect all buttons */}
             <div className="rosterHeader">
-                <label>Available Roster ({selectedIds.length} Selected)</label>
+                <label>Available Roster (<span className="oswald">{selectedIds.length} Selected</span>)</label>
                 <div className="dbdButtonContainer">
                     <button type="button" className="button dbdButton" onClick={selectAll}>Select All</button>
                     <button type="button" className="button dbdButton" onClick={deselectAll}>Clear</button>
@@ -39,6 +40,7 @@ export const RosterSelector = ({ selectedIds, onChange }: RosterSelectorProps) =
                             className={`button dbdInputButton ${isSelected ? 'selectedButton' : ''}`}>
                             <img src={`/assets/killerPortraits/${character.id.toLowerCase()}.png`} alt={character.name}/>
                             <p>{character.name}</p>
+                            <p className="oswald">{character.dlc}</p>
                         </div>
                     );
                 })}

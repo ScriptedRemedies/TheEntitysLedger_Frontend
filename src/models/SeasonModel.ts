@@ -4,13 +4,10 @@ export interface SeasonModel {
     playerRole: string; // Either Killer or Survivor
     playerName: string;
     platform: string;
-
     variantId: string;
-
     matches: [];
     badge: string;
     pip: number;
-
     isCurrent: boolean;
     result: string;
 }
@@ -31,16 +28,25 @@ export interface SeasonVariant {
     readonly features: VariantFeatures;
 }
 export interface VariantFeatures {
-    readonly hasShop: boolean;          // Enables the "Blood Money" shop UI
-    readonly hasRandomizer: boolean;    // Enables the "Spin Wheel" UI
-    readonly permaDeath: boolean;       // Enables the "Dead" toggle
-    readonly winCondition: 'STRICT_4K' | 'STANDARD_3K' | 'POINTS'; // Changes the "Win" button logic
-    readonly startingCurrency?: number; // Optional: Only needed if hasShop is true
+    readonly permadeath: boolean;       // Enables the "Dead" toggle
+    readonly winCondition: 'STRICT_4K' | 'STANDARD_3K'; // Changes the "Win" button logic
 
-    readonly levelCap?: number;           // For Scavenger (limits inputs to lvl 10)
+    // OPTIONS FOR ADEPT HARDCORE
     readonly forceAdept?: boolean;        // For Adept (locks 3 perk slots)
-    readonly rosterGroup?: 'BASE_GAME';   // For Base Game (filters the selection screen)
-    readonly seasonGoal?: 'GOLD_1';       // For Base Game (changes progress bar max)
+    readonly fourthPerkOption?: 'BLOCKED' | 'RANDOM';  // If the user chooses to either randomize the 4th slot or block it
+
+    // OPTIONS FOR BASE GAME
+    readonly seasonGoal?: 'GOLD_1';       // Changes progress bar max
+
+    // OPTIONS FOR BLOOD MONEY
+    readonly hasShop?: boolean;          // Enables the "Blood Money" shop UI
+    readonly startingCurrency?: number;  // Optional: Only needed if hasShop is true
+
+    // OPTIONS FOR ROULETTE
+    readonly hasRandomizer?: boolean;    // Enables the "Spin Wheel" UI
+
+    // OPTIONS FOR IRON MAN
+    readonly repeatedLoadout?: boolean; // Forces the "no repeated loadouts"
 }
 
 export interface CustomSeason {
@@ -51,129 +57,124 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
     {
         id: 'CLASSIC',
         name: 'The Classic',
-        description: 'Reach Iridescent 1 rank before running out of killers.',
+        description: 'Make it from Ash 4 to Iridescent 1 before running out of killers.',
         difficulty: 'HARD',
         rules: [
-            'No perks... No Add-ons... No Offerings.',
-            'A win is achieving at least 3 kills in a match.',
-            'A loss is if one or more survivors escape.',
-            'Full access to all characters owned.',
-            'If the match is a loss, the specific killer used is "gone forever" from the challenge and cannot be used again in the season.',
-            'Game tactics such as tunneling and slugging are allowed.'
+            'Loss of Perks: Player looses one perk slot per rank (4 available perks for Ash, 3 for Bronze, 2 for Silver, 1 for Gold, 0 for Iridescent).',
+            'No Add-ons: Killers are not allowed to use add-ons.',
+            'Win Condition: A "Win" is a 3K (three kills) or 4K.',
+            'Loss Condition: A 2K or fewer or any exits through an exit gate is a loss.',
+            'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again for the rest of the challenge.',
+            'Hatch Exception: If one survivor escapes through the hatch, it is not considered a loss. However, if two or more escape through the hatch, the killer is eliminated.',
+            'Character Selection: Full access to all characters owned.'
         ],
         features: {
-            hasShop: false,
-            hasRandomizer: false,
-            permaDeath: true,
+            permadeath: true,
             winCondition: 'STANDARD_3K'
-        }
-    },
-    {
-        id: 'BLOOD_MONEY',
-        name: 'Blood Money',
-        description: 'Capitalism in the Fog. You must buy every perk you use.',
-        difficulty: 'HARD',
-        rules: [
-            'Economy: Start with $500. Everything costs money.',
-            'Pay-Per-Match: You must buy your load out for every single trial.',
-            'Taxes: Penalties for Generators completed and Survivors escaping.',
-            'Bankruptcy: If you hit $0, you play with no perks/items.'
-        ],
-        features: {
-            hasShop: true,    // <--- ACTIVATES THE SHOP COMPONENT
-            hasRandomizer: false,
-            permaDeath: true,
-            winCondition: 'STANDARD_3K',
-            startingCurrency: 500
-        }
-    },
-    {
-        id: 'ROULETTE',
-        name: 'The Roulette',
-        description: 'Fate decides your killer. You cannot choose who you play.',
-        difficulty: 'HARD',
-        rules: [
-            'Random Selection: Use a wheel to pick your character each match.',
-            'Permadeath: If the random character loses, they are eliminated from the wheel.',
-            'No Saving: You cannot "save" strong killers for high ranks.'
-        ],
-        features: {
-            hasShop: false,
-            hasRandomizer: true,   // <--- ACTIVATES THE WHEEL COMPONENT
-            permaDeath: true,
-            winCondition: 'STANDARD_3K'
-        }
-    },
-    {
-        id: 'IRON_MAN',
-        name: 'Iron Man',
-        description: 'The ultimate test. Perfection or death.',
-        difficulty: 'NIGHTMARE',
-        rules: [
-            'Strict Win: Only a 4K counts as a win. Hatch escape = Loss.',
-            'No Add-ons: You are never allowed to bring add-ons.',
-            'Permadeath: One mistake and the character is gone.'
-        ],
-        features: {
-            hasShop: false,
-            hasRandomizer: false,
-            permaDeath: true,
-            winCondition: 'STRICT_4K' // <--- CHANGES "WIN" BUTTON LOGIC
-        }
-    },
-    {
-        id: 'SCAVENGER',
-        name: 'The Scavenger',
-        description: 'Make do with what you find in the trash.',
-        difficulty: 'HARD',
-        rules: [
-            'Level Cap: You may only level a character to Level 10.',
-            'Limited Resources: You can only use the perks/add-ons found in those first 10 levels.',
-            'No Shop: You cannot buy more items once you run out.'
-        ],
-        features: {
-            hasShop: false,
-            hasRandomizer: false,
-            permaDeath: true,
-            winCondition: 'STANDARD_3K',
-            levelCap: 10 // <--- TELLS UI TO BLOCK LEVELS 11-50
         }
     },
     {
         id: 'ADEPT_HARDCORE',
         name: 'Adept Hardcore',
-        description: 'Master the unique play styles of each character.',
+        description: 'Make it from Ash 4 to Iridescent 1 before running out of killers by only playing the characters specific perks.',
         difficulty: 'HARD',
         rules: [
-            'Locked Loadout: You must use the character\'s 3 unique perks.',
-            'Fourth Slot: The 4th perk slot is wildcard (or banned, depending on preference).',
-            'Permadeath: Standard permadeath rules apply.'
+            'Locked Perks: You must use the Killer\'s 3 unique perks. The 4th perk slot is either banned or must be empty.',
+            'No Add-ons: You are not allowed to use add-ons (or must use "Brown" rarity only, depending on difficulty preference).',
+            'Win Condition: You must achieve a "Merciless Killer" result (which typically requires a 4K).',
+            'Loss Condition: Anything less than a 4K is a loss.',
+            'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again for the rest of the challenge.',
+            'Character Selection: Full access to all characters owned.',
         ],
         features: {
-            hasShop: false,
-            hasRandomizer: false,
-            permaDeath: true,
-            winCondition: 'STANDARD_3K',
-            forceAdept: true // <--- TELLS UI TO AUTO-FILL PERK SLOTS
+            permadeath: true,
+            winCondition: 'STRICT_4K',
+            forceAdept: true,
+            fourthPerkOption: 'BLOCKED' // User can change this option in the UI
         }
     },
     {
         id: 'BASE_GAME',
         name: 'Base Game',
-        description: 'A shorter challenge using only the original 5 Killers.',
+        description: 'Make it from Ash 4 to Gold 1 using only the original 5 Killers.',
         difficulty: 'NORMAL',
         rules: [
-            'Roster Limit: Trapper, Wraith, Hillbilly, Nurse, Huntress ONLY.',
-            'Short Season: Goal is usually to reach Gold Rank, not Iridescent.',
-            'Permadeath: Losing a killer is devastating due to small roster size.'
+            'Perk Limit: You start with 4 perk slots at Ash grade. You lose one perk slot for every grade color you advance (Ash: 4, Bronze: 3, Silver: 2, Gold: 1, Iridescent: 0).',
+            'Add-ons: Add-ons are generally permitted unless you wish to play on "Hard Mode" (no add-ons allowed).',
+            'Win Condition: A "Win" is a 3K (three kills) or 4K.',
+            'Loss Condition: A 2K or fewer or any exits through an exit gate is a loss.',
+            'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again.',
+            'Hatch Exception: If one survivor escapes through the hatch, it is not considered a loss. However, if two or more escape through the hatch, the killer is eliminated.',
+            'Roster Limit: You may only use the original 5 Killers.'
         ],
         features: {
-            hasShop: false,
-            hasRandomizer: false,
-            permaDeath: true,
+            permadeath: true,
             winCondition: 'STANDARD_3K',
-            rosterGroup: 'BASE_GAME', // <--- TELLS UI TO HIDE DLC CHARACTERS
-            seasonGoal: 'GOLD_1'      // <--- TELLS UI TO SHORTEN PROGRESS BAR
+            seasonGoal: 'GOLD_1'
+        }
+    },
+    {
+        id: 'BLOOD_MONEY',
+        name: 'Blood Money',
+        description: 'Make it from Ash 4 to Iridescent 1 before running out of killers or before going bankrupt.',
+        difficulty: 'HARD',
+        rules: [
+            'Starting Funds: You begin the season with $50 or a value of your choice.',
+            'Pay-to-Play: You must purchase every perk you wish to use for a specific trial.',
+            'Income: You earn money based on your performance.',
+            'Penalties: You can loose money based on your performance.',
+            'Bankruptcy: If your funds are below or equal to $0, you must sell a killer to regain enough funds to start a match.',
+            'No Add-ons: You are not allowed to use add-ons.',
+            'Win Condition: A "Win" is a 3K or 4K. Wins generate profit.',
+            'Loss Condition: A 2K or fewer is a loss. You lose the match fee and generate no profit.',
+            'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again for the rest of the challenge.',
+            'Character Selection: Full access to all characters owned.'
+        ],
+        features: {
+            permadeath: true,
+            winCondition: 'STANDARD_3K',
+            startingCurrency: 50,
+            hasShop: true
+        }
+    },
+    {
+        id: 'ROULETTE',
+        name: 'The Roulette',
+        description: 'Make it from Ash 4 to Iridescent 1 by playing all characters at least once, but not by choosing them yourself.',
+        difficulty: 'HARD',
+        rules: [
+            'Random Selection: Your Killer will be randomized before every match.',
+            'No Respinning: You cannot respin the wheel to avoid a weak Killer.',
+            'Locked Loadout: You must use the specific perk loadout assigned by the randomizer.',
+            'Win Condition: A "Win" is a 3K or 4K.',
+            'Loss Condition: A 2K or fewer is a loss.',
+            'Hatch Exception: Hatch escapes do not count as a loss.',
+            'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again for the rest of the challenge.',
+            'Character Selection: Full access to all characters owned.'
+        ],
+        features: {
+            permadeath: true,
+            winCondition: 'STANDARD_3K',
+            hasRandomizer: true
+        }
+    },
+    {
+        id: 'IRON_MAN',
+        name: 'Iron Man',
+        description: 'Make it from Ash 4 to Iridescent 1 before running out of killers with a strict 4K rule.',
+        difficulty: 'NIGHTMARE',
+        rules: [
+            'Strict Win Condition: Only a 4K (four kills) counts as a win. Any survivor escape (Gate or Hatch) is a loss.',
+            'No Add-ons: You are not allowed to use add-ons.',
+            'No Second Chances: There are no "safety pips" or hatch exceptions. Perfection is required.',
+            'Perks: Full access to perks, but you cannot use the same build twice in a row.',
+            'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again for the rest of the challenge.',
+            'Character Selection: Full access to all characters owned.'
+        ],
+        features: {
+            permadeath: true,
+            winCondition: 'STRICT_4K',
+            repeatedLoadout: true
         }
     }
 ] as const;

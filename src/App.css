@@ -69,7 +69,7 @@ main {
                 /* --- LAYER 1: RED HOVER (Hidden by default) --- */
             linear-gradient(to left, var(--red), var(--red)),
                 /* --- LAYER 2: GRAY DEFAULT (Always visible) --- */
-            linear-gradient(to left, rgba(18, 18, 18, 0.95), transparent);
+            linear-gradient(to left, #070809, #070809);
     background-position: right center, right center;
     background-repeat: no-repeat;
     background-size: 0 100%, 100% 100%;
@@ -98,6 +98,13 @@ main {
     display: flex;
     gap: 20px;
 }
+/* The container that holds the variant options */
+.variantOptionsContainer {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(18, 18, 18, .95);
+    box-shadow: -8px 6px 3px rgba(0, 0, 0, 0.6);
+}
 /* Specific to the variant button container */
 .variantContainer {
     margin: 20px 0;
@@ -107,7 +114,11 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: center;
+
+    .dbdButtonContainer {
+        display: flex;
+        gap: 20px;
+    }
 }
 /* GLOBAL List view of characters */
 .rosterList {
