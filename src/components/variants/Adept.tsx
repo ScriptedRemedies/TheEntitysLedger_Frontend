@@ -3,20 +3,38 @@ import {KILLER_ROSTER} from "../../models/GameData.ts";
 import {useState} from "react";
 
 export const Adept = () => {
+    // Grabs the roster
     const [roster, setRoster] = useState<string[]>(KILLER_ROSTER.map(k => k.id));
+    // STATE : Tracks the selected state of the 4th perk option
+    const [selectedOption, setSelectedOption] = useState("BLOCKED");
+
     return (
         <div>
             {/* Silently send the roster list */}
             <input type="hidden" name="startingRoster" value={JSON.stringify(roster)}/>
+            {/* Silently sends the selected perk option */}
+            <input type="hidden" name="fourthPerkOption" value={selectedOption}/>
 
             <h3>Adept Hardcore Options</h3>
 
             <div className="dbdFormGroup">
-                <label>4th Perk Slot Rule</label>
-                <select name="fourthPerkOption" className="dbdInput">
-                    <option value="BLOCKED">Blocked (Empty Slot)</option>
-                    <option value="RANDOM">Randomized (Roulette)</option>
-                </select>
+                <label>4th Perk Setting:</label>
+                <div className="inputButtonsContainer">
+                    {/* Blocked - Empty Slot, Not Playable */}
+                    <button
+                        type="button"
+                        className={`button dbdInputButton ${selectedOption === 'BLOCKED' ? 'selectedButton' : ''}`}
+                        onClick={() => setSelectedOption('BLOCKED')}>
+                        Blocked
+                    </button>
+                    {/* Randomized */}
+                    <button
+                        type="button"
+                        className={`button dbdInputButton ${selectedOption === 'RANDOM' ? 'selectedButton' : ''}`}
+                        onClick={() => setSelectedOption('RANDOM')}>
+                        Randomized
+                    </button>
+                </div>
             </div>
 
             <div className="dbdFormGroup">
