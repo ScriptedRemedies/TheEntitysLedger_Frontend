@@ -3,7 +3,10 @@ import {KILLER_ROSTER} from "../../models/GameData.ts";
 import {useState} from "react";
 
 export const BaseGame = () => {
-    const [roster, setRoster] = useState<string[]>(KILLER_ROSTER.map(k => k.id));
+
+    const baseCharacters = KILLER_ROSTER.filter(char => char.dlc === 'Base Game');
+    const [roster, setRoster] = useState<string[]>(
+        baseCharacters.map(k => k.id));
     return (
         <div>
             {/* Silently send the roster list */}
@@ -11,7 +14,7 @@ export const BaseGame = () => {
 
             <h3>Base Game Options</h3>
             <div className="dbdFormGroup">
-                <RosterSelector selectedIds={roster} onChange={setRoster} />
+                <RosterSelector selectedIds={roster} onChange={setRoster} limitToCharacters={baseCharacters} />
             </div>
         </div>
     )
