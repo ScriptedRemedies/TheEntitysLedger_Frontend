@@ -36,6 +36,7 @@ export interface VariantFeatures {
     readonly fourthPerkOption?: 'BLOCKED' | 'RANDOM';  // If the user chooses to either randomize the 4th slot or block it
 
     // OPTIONS FOR BASE GAME
+    readonly reducedPerks?: boolean;
     readonly seasonGoal?: 'GOLD_1';       // Changes progress bar max
 
     // OPTIONS FOR BLOOD MONEY
@@ -110,6 +111,7 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
         features: {
             permadeath: true,
             winCondition: 'STANDARD_3K',
+            reducedPerks: true,
             seasonGoal: 'GOLD_1'
         }
     },
