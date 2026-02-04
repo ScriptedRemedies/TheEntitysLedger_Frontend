@@ -1,11 +1,21 @@
-import {KILLER_ROSTER} from "../models/GameData.ts";
+import {type Character, KILLER_ROSTER} from "../models/GameData.ts";
 
 interface RosterSelectorProps {
     selectedIds: string[];
     onChange: (ids: string[]) => void;
+    limitToCharacters?: Character[];
+
+    // Blood Money Logic
+    showCosts?: boolean;
+    editCosts?: boolean;
+    costs?: Record<string, number>;
+    onCostChange?: (id: string, newCost: number) => void;
 }
 
-export const RosterSelector = ({ selectedIds, onChange }: RosterSelectorProps) => {
+export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showCosts, editCosts, costs, onCostChange }: RosterSelectorProps) => {
+
+    const activeList = limitToCharacters || KILLER_ROSTER;
+
     const toggleCharacter = (id: string) => {
         if (selectedIds.includes(id)) {
             onChange(selectedIds.filter(x => x != id)); // Remove it from list
@@ -14,15 +24,17 @@ export const RosterSelector = ({ selectedIds, onChange }: RosterSelectorProps) =
         }
     };
 
-    const selectAll = () => onChange(KILLER_ROSTER.map(k => k.id));
+    const selectAll = () => onChange(activeList.map(k => k.id));
     const deselectAll = () => onChange([]);
 
     return (
         <div className="rosterSelectorContainer">
             {/* Disclaimer */}
-            <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span style={{ fontStyle: 'italic' }}>Either you haven't bought the character yet, or DBD disabled them.</span></p>
+            {!limitToCharacters && (
+                <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span style={{ fontStyle: 'italic' }}>Either you haven't bought the character yet, or DBD disabled them.</span></p>
+            )}
             {/* Select and deselect all buttons */}
-            <div className="rosterHeader">
+            <div className="dbdFormGroup">
                 <label>Available Roster (<span className="oswald">{selectedIds.length} Selected</span>)</label>
                 <div className="dbdButtonContainer">
                     <button type="button" className="button dbdButton" onClick={selectAll}>Select All</button>
@@ -31,13 +43,32 @@ export const RosterSelector = ({ selectedIds, onChange }: RosterSelectorProps) =
             </div>
 
             <div className="rosterList">
-                {KILLER_ROSTER.map((character) => {
+                {activeList.map((character) => {
                     const isSelected = selectedIds.includes(character.id);
+                    const currentCost = costs?.[character.id] ?? character.cost;
+
                     return (
                         <div
                             key={character.id}
-                            onClick={() => toggleCharacter(character.id)}
+                            onClick={(e) => {
+                                if ((e.target as HTMLElement).tagName !== 'INPUT') {
+                                    toggleCharacter(character.id);
+                                }
+                            }}
                             className={`button dbdInputButton ${isSelected ? 'selectedButton' : ''}`}>
+                            {/* Shows the price tag for Blood Money */}
+                            {showCosts && (
+                                <div className="priceTag">
+                                    {editCosts ? (
+                                        <input className="priceTagInput" type="number" value={currentCost} onChange={(e) => onCostChange?.(character.id, Number(e.target.value))}/>
+                                    ) : (
+                                        <span>
+                                            ${currentCost}
+                                        </span>
+                                    )}
+                                </div>
+                            )}
+
                             <img src={`/assets/killerPortraits/${character.id.toLowerCase()}.png`} alt={character.name}/>
                             <p>{character.name}</p>
                             <p className="oswald">{character.dlc}</p>
