@@ -16,7 +16,13 @@ export const Adept = () => {
             <input type="hidden" name="fourthPerkOption" value={selectedOption}/>
 
             <div className="dbdFormGroup">
-                <h5>4th Perk Setting</h5>
+                <h5>4th Perk Setting: <span className="oswald">{selectedOption}</span></h5>
+                {selectedOption === 'BLOCKED' ? (
+                    <p style={{ fontStyle: 'italic' }}>You will not have access to a 4th perk.</p>
+                ) : (
+                    <p style={{ fontStyle: 'italic' }}>The 4th perk will be randomized at the start of each match.</p>
+                )}
+                <p style={{ fontStyle: 'italic' }}></p>
                 <div className="inputButtonsContainer">
                     {/* Blocked - Empty Slot, Not Playable */}
                     <button
