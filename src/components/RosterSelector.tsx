@@ -29,18 +29,19 @@ export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showC
 
     return (
         <div className="rosterSelectorContainer">
-            {/* Disclaimer */}
-            {!limitToCharacters && (
-                <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span style={{ fontStyle: 'italic' }}>Either you haven't bought the character yet, or DBD disabled them.</span></p>
-            )}
             {/* Select and deselect all buttons */}
             <div className="dbdFormGroup">
-                <label>Available Roster (<span className="oswald">{selectedIds.length} Selected</span>)</label>
+                <h5>Available Roster (<span className="oswald">{selectedIds.length} Selected</span>)</h5>
                 <div className="dbdButtonContainer">
                     <button type="button" className="button dbdButton" onClick={selectAll}>Select All</button>
                     <button type="button" className="button dbdButton" onClick={deselectAll}>Clear</button>
                 </div>
             </div>
+
+            {/* Disclaimer */}
+            {!limitToCharacters && (
+                <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span style={{ fontStyle: 'italic' }}>Either you haven't bought the character yet, or DBD disabled them.</span></p>
+            )}
 
             <div className="rosterList">
                 {activeList.map((character) => {

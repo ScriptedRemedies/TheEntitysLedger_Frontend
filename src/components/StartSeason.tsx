@@ -51,82 +51,86 @@ export const StartSeason = () => {
                 {/* Silently send the variant id */}
                 <input type="hidden" name="variantId" value={selectedVariant} />
 
-                {/* Player Name & Platform */}
-                <div className="dbdFormGroup">
-                    <label>Player Name</label>
-                    <input type="text" name="playerName" className="dbdInput" required/>
-                </div>
+                {/* The entire set up section before selecting the variant */}
+                <div className="seasonSetup dbdCard">
+                    <h2>Step <span className="englishSC">I</span>: Basic Details</h2>
+                    {/* Player name */}
+                    <div className="dbdFormGroup">
+                        <h4>Enter Your Account Name</h4>
+                        <input type="text" name="playerName" className="dbdInput" placeholder="playerUserName" required/>
+                    </div>
 
-                <div className="dbdFormGroup">
-                    <label>Platform</label>
-                    <div className="inputButtonsContainer">
-                        {/* PC */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPlatform === 'PC' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPlatform('PC')}>
-                            PC
-                        </button>
-                        {/* PlayStation */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPlatform === 'PlayStation' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPlatform('PlayStation')}>
-                            PlayStation
-                        </button>
-                        {/* XBOX */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPlatform === 'XBOX' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPlatform('XBOX')}>
-                            XBOX
-                        </button>
-                        {/* Switch */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPlatform === 'Switch' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPlatform('Switch')}>
-                            Switch
-                        </button>
-                        {/* Mobile */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPlatform === 'Mobile' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPlatform('Mobile')}>
-                            Mobile
-                        </button>
+                    {/* Platform */}
+                    <div className="dbdFormGroup">
+                        <h4>Choose Your Platform</h4>
+                        <div className="inputButtonsContainer">
+                            {/* PC */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPlatform === 'PC' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPlatform('PC')}>
+                                PC
+                            </button>
+                            {/* PlayStation */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPlatform === 'PlayStation' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPlatform('PlayStation')}>
+                                PlayStation
+                            </button>
+                            {/* XBOX */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPlatform === 'XBOX' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPlatform('XBOX')}>
+                                XBOX
+                            </button>
+                            {/* Switch */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPlatform === 'Switch' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPlatform('Switch')}>
+                                Switch
+                            </button>
+                            {/* Mobile */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPlatform === 'Mobile' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPlatform('Mobile')}>
+                                Mobile
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Player Role Selection */}
+                    <div className="dbdFormGroup">
+                        <h4>Pick Your Role: <span className="oswald">{selectedPR === 'KILLER' ? 'KILLER' : 'SURVIVOR'}</span></h4>
+                        <div className="inputButtonsContainer">
+                            {/* Killer */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPR === 'KILLER' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPR('KILLER')}>
+                                <img src="/assets/icons/killerIcon.png" alt="Killer"/>
+                            </button>
+                            {/* Survivor */}
+                            <button
+                                type="button"
+                                className={`button dbdInputButton ${selectedPR === 'SURVIVOR' ? 'selectedButton' : ''}`}
+                                onClick={() => setSelectedPR('SURVIVOR')}>
+                                <img src="/assets/icons/survivorIcon.png" alt="Survivor"/>
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                {/* Player Role Selection */}
-                <div className="dbdFormGroup">
-                    <label>Role</label>
-                    <div className="inputButtonsContainer">
-                        {/* Killer */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPR === 'KILLER' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPR('KILLER')}>
-                            <img src="/assets/icons/killerIcon.png" alt="Killer"/>
-                        </button>
-                        {/* Survivor */}
-                        <button
-                            type="button"
-                            className={`button dbdInputButton ${selectedPR === 'SURVIVOR' ? 'selectedButton' : ''}`}
-                            onClick={() => setSelectedPR('SURVIVOR')}>
-                            <img src="/assets/icons/survivorIcon.png" alt="Survivor"/>
-                        </button>
-                    </div>
-                </div>
-                <p>{selectedPR === 'KILLER' ? 'KILLER' : 'SURVIVOR'}</p>
 
                 {/* Killer view is first, survivor is the else statement */}
                 {selectedPR === 'KILLER' ? (
                     <div className="startSeasonViewContainer">
                         {/* Season Variant Selection */}
-                        <div className="dbdFormGroup">
-                            <label>Season Variant</label>
-                            <div className="inputButtonsContainer variantContainer">
+                        <div className="dbdCard dbdFormGroup">
+                            <h2>Step <span className="englishSC">II</span>: Select Your Season</h2>
+                            <div className="inputButtonsContainer">
                                 {SEASON_VARIANTS.map((variant) => (
                                     <button
                                         key={variant.id}
@@ -137,26 +141,38 @@ export const StartSeason = () => {
                                     </button>
                                 ))}
                             </div>
+
+                            {/* Season Variant Rules */}
+                            <h5>Difficulty Level</h5>
+                            <p className="oswald">{activeVariantInfo.difficulty}</p>
+                            <h5>Objective</h5>
+                            <p>{activeVariantInfo.description}</p>
+                            <h4>{activeVariantInfo.name} Rules</h4>
+                            <ul className="variantRulesList">
+                                {activeVariantInfo.rules.map((rule, index) => {
+                                    const splitIndex = rule.indexOf(':');
+
+                                    // Handles if a rule is missing the ":"
+                                    if (splitIndex === -1) {
+                                        return <li key={index}>{rule}</li>;
+                                    }
+
+                                    const title = rule.slice(0, splitIndex);
+                                    const description = rule.slice(splitIndex + 1);
+
+                                    return (
+                                        <li key={index}>
+                                            <span className="ruleTitle oswald">{title}:</span><br/><span className="ruleDescription">{description}</span>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
 
-                        {/* Season Variant Rules */}
+                        {/* Season Variant Options & Character List */}
                         <div className="dbdCard">
-                            <div>
-                                <h3>{activeVariantInfo.name}</h3>
-                                <p className="oswald">{activeVariantInfo.difficulty}</p>
-                                <p>{activeVariantInfo.description}</p>
-                                <ol>
-                                    {activeVariantInfo.rules.map((rule, index) => (
-                                        <li key={index}>{rule}</li>
-                                    ))}
-                                </ol>
-                            </div>
-                        </div>
-
-                        {/* Season Variant Options */}
-                        <div className="variantOptionsContainer">
-
-                            {/* Render the specific component for the selected variant */}
+                            <h2>Step <span className="englishSC">III</span>: Choose Your Options & Killers</h2>
+                            {/* Render the specific component for the selected variant and the relevant character list */}
                             {ActiveVariantComponent && <ActiveVariantComponent />}
                         </div>
                     </div>

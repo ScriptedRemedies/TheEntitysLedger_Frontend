@@ -82,12 +82,32 @@ main {
 .startSeasonViewContainer {
     margin: auto;
     width: 80vw;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .form {
     margin: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+/* Styles for the list of variant rules */
+.variantRulesList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+
+    li {
+        padding: 10px;
+        background: #1c1c1c;
+    }
+
+    .ruleTitle {
+        font-size: 1.3rem;
+    }
 }
 /* GLOBAL form styles : for any forms */
 .dbdFormGroup {
@@ -103,21 +123,11 @@ main {
         width: fit-content;
     }
 }
-/* The container that holds the variant options */
-.variantOptionsContainer {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(18, 18, 18, .95);
-    box-shadow: -8px 6px 3px rgba(0, 0, 0, 0.6);
-}
-/* Specific to the variant button container */
-.variantContainer {
-    margin: 20px 0;
-}
 /* Roster Selector at start of season */
 .rosterSelectorContainer {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 
     .dbdButtonContainer {
         display: flex;
@@ -210,7 +220,8 @@ main {
         width: 80px;
     }
 }
-.dbdInputButton:hover:not(.rosterList .button:hover), .selectedButton {
+.dbdInputButton:hover:not(.rosterList .button:hover),
+.selectedButton {
     background-color: rgba(0, 0, 0, 0.90);
     background-size:
             25% 2px, 2px 25%, /* Top Left */
@@ -221,16 +232,66 @@ main {
 }
 /* GLOBAL input styles : used for text input on forms */
 .dbdInput {
-
+    padding: 7px;
+    box-shadow: -4px 3px 3px rgba(0, 0, 0, 0.6);
+    background-color: #070809;
+    border: none;
+    color: var(--text-muted);
+    outline: none;
+    background-image:
+        /* Top Left (Horizontal, Vertical) */
+            linear-gradient(white, white), linear-gradient(white, white),
+                /* Top Right */
+            linear-gradient(white, white), linear-gradient(white, white),
+                /* Bottom Right */
+            linear-gradient(white, white), linear-gradient(white, white),
+                /* Bottom Left */
+            linear-gradient(white, white), linear-gradient(white, white);
+    background-repeat: no-repeat;
+    background-position:
+            0 0, 0 0,           /* Top Left */
+            100% 0, 100% 0,     /* Top Right */
+            100% 100%, 100% 100%, /* Bottom Right */
+            0 100%, 0 100%;     /* Bottom Left */
+    background-size:
+            0 2px, 2px 0,  /* Top Left */
+            0 2px, 2px 0,  /* Top Right */
+            0 2px, 2px 0,  /* Bottom Right */
+            0 2px, 2px 0;  /* Bottom Left */
+    transition:
+            background-size 0.3s ease-out,
+            transform 0.2s ease-in-out,
+            border-color 0.3s ease;
+}
+.dbdInput:focus,
+.dbdInput:hover {
+    background-color: rgba(0, 0, 0, 0.90);
+    background-size:
+            15% 2px, 2px 25%, /* Top Left */
+            15% 2px, 2px 25%, /* Top Right */
+            15% 2px, 2px 25%, /* Bottom Right */
+            15% 2px, 2px 25%; /* Bottom Left */
+    color: white;
 }
 /* GLOBAl Card styles : can be used for any clickable card such as seasons, matches, etc */
 .dbdCard {
     position: relative;
-    cursor: pointer;
     padding: 20px;
     background-color: rgba(18, 18, 18, 0.95);
     color: var(--text-muted);
     box-shadow: -8px 6px 3px rgba(0, 0, 0, 0.6);
+}
+/* Specific to the season setup options */
+.seasonSetup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* Specific to the options and character selection - marks an active component */
+.activeComponent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 /* GLOBAL Card hover styles to make corner borders grow on hover : can be used for any hover-able items */
 .cardHover {

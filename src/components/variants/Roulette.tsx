@@ -5,11 +5,10 @@ import {useState} from "react";
 export const Roulette = () => {
     const [roster, setRoster] = useState<string[]>(KILLER_ROSTER.map(k => k.id));
     return (
-        <div>
+        <div className="activeComponent">
             {/* Silently send the roster list */}
             <input type="hidden" name="startingRoster" value={JSON.stringify(roster)}/>
 
-            <h3>Roulette Options</h3>
             <div className="dbdFormGroup">
                 <RosterSelector selectedIds={roster} onChange={setRoster} />
             </div>

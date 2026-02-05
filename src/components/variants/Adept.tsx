@@ -9,16 +9,14 @@ export const Adept = () => {
     const [selectedOption, setSelectedOption] = useState("BLOCKED");
 
     return (
-        <div>
+        <div className="activeComponent">
             {/* Silently send the roster list */}
             <input type="hidden" name="startingRoster" value={JSON.stringify(roster)}/>
             {/* Silently sends the selected perk option */}
             <input type="hidden" name="fourthPerkOption" value={selectedOption}/>
 
-            <h3>Adept Hardcore Options</h3>
-
             <div className="dbdFormGroup">
-                <label>4th Perk Setting:</label>
+                <h5>4th Perk Setting</h5>
                 <div className="inputButtonsContainer">
                     {/* Blocked - Empty Slot, Not Playable */}
                     <button

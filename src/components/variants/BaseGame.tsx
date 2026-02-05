@@ -8,11 +8,10 @@ export const BaseGame = () => {
     const [roster, setRoster] = useState<string[]>(
         baseCharacters.map(k => k.id));
     return (
-        <div>
+        <div className="activeComponent">
             {/* Silently send the roster list */}
             <input type="hidden" name="startingRoster" value={JSON.stringify(roster)}/>
 
-            <h3>Base Game Options</h3>
             <div className="dbdFormGroup">
                 <RosterSelector selectedIds={roster} onChange={setRoster} limitToCharacters={baseCharacters} />
             </div>
