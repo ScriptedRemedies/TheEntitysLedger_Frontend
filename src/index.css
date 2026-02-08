@@ -36,3 +36,7 @@
   font-family: 'IM Fell English SC', sans-serif;
   text-transform: uppercase;
 }
+/* Italic text */
+.italic {
+  font-style: italic;
+}

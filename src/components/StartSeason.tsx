@@ -1,4 +1,4 @@
-import {Form, useNavigate, useOutletContext} from "react-router-dom";
+import {Form, useOutletContext} from "react-router-dom";
 import type {UserModel} from "../models/UserModel.ts";
 import {useState} from "react";
 import {SEASON_VARIANTS} from "../models/SeasonModel.ts";
@@ -19,8 +19,6 @@ const VARIANT_VIEWS: Record<string, React.FC> = {
 }
 
 export const StartSeason = () => {
-    // Back button, navigates to previous screen
-    const navigate = useNavigate();
 
     // Gets userId
     const { user } = useOutletContext<{ user: UserModel }>();
@@ -39,9 +37,8 @@ export const StartSeason = () => {
     return (
         <div className="componentContainer">
             <h1>Start a new Season</h1>
-            <button className="button dbdButton" onClick={() => navigate(-1)}>Cancel</button>
 
-            <Form method="post" className="form">
+            <Form method="post" className="form" id="season-form">
                 {/* Silently sends the user id */}
                 <input type="hidden" name="userId" value={user.id}/>
                 {/* Silently sends the selected state for platform */}
@@ -182,7 +179,6 @@ export const StartSeason = () => {
                     </div>
                 )}
 
-                <button type="submit" className="button dbdButton">Start Season</button>
             </Form>
 
         </div>

@@ -12,6 +12,17 @@ main {
     flex-direction: column;
     color: var(--text-muted);
 }
+.header {
+    position: sticky;
+    top: 0; left: 0;
+    z-index: 100;
+    background: rgba(18, 18, 18, 0.98);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
 /* GLOBAL Styles for the entire component containers */
 .componentContainer {
@@ -109,6 +120,38 @@ main {
         font-size: 1.3rem;
     }
 }
+/*  */
+.economyItemList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: start;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        padding: 10px;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+        filter: grayscale(100%) opacity(0.5);
+        transition: all 0.3s ease;
+    }
+    li.selectedButton {
+        filter: grayscale(0%) opacity(1);
+    }
+
+    .economyItemTitle {
+        position: relative;
+        width: 100%;
+
+        .oswald {
+            font-size: 1.3rem;
+        }
+    }
+}
 /* GLOBAL form styles : for any forms */
 .dbdFormGroup {
 
@@ -147,6 +190,11 @@ main {
 
     .dbdInputButton {
         position: relative;
+        filter: grayscale(100%) opacity(0.5);
+        transition: all 0.3s ease;
+    }
+    .dbdInputButton.selectedButton {
+        filter: grayscale(0%) opacity(1);
     }
 
     img {
@@ -157,6 +205,29 @@ main {
         text-align: center;
     }
 }
+/* GLOBAL List view of the perks */
+.perkList {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    justify-content: center;
+    gap: 20px;
+
+    button {
+        padding: 0;
+    }
+
+    .dbdInputButton {
+        position: relative;
+        filter: grayscale(100%) opacity(0.5);
+        transition: all 0.3s ease;
+    }
+    .dbdInputButton.selectedButton {
+        filter: grayscale(0%) opacity(1);
+    }
+    img {
+        width: 100% !important;
+    }
+}
 /* The price tags over the killers */
 .priceTag {
     position: absolute;
@@ -165,8 +236,8 @@ main {
     background: var(--red);
     border: 1px solid #000;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,12 +286,13 @@ main {
     align-items: center;
     width: 100%;
     text-align: center;
+    outline: none;
 
     img {
         width: 80px;
     }
 }
-.dbdInputButton:hover:not(.rosterList .button:hover),
+.dbdInputButton:hover:not(.rosterList .button:hover, .perkList .button:hover, li:hover),
 .selectedButton {
     background-color: rgba(0, 0, 0, 0.90);
     background-size:
@@ -229,6 +301,9 @@ main {
             25% 2px, 2px 25%, /* Bottom Right */
             25% 2px, 2px 25%; /* Bottom Left */
     color: white;
+}
+.startingAmount {
+    width: 60px;
 }
 /* GLOBAL input styles : used for text input on forms */
 .dbdInput {
@@ -291,7 +366,7 @@ main {
 .activeComponent {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px 0;
 }
 /* GLOBAL Card hover styles to make corner borders grow on hover : can be used for any hover-able items */
 .cardHover {

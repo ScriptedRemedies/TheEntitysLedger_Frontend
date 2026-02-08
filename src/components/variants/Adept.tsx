@@ -18,11 +18,11 @@ export const Adept = () => {
             <div className="dbdFormGroup">
                 <h5>4th Perk Setting: <span className="oswald">{selectedOption}</span></h5>
                 {selectedOption === 'BLOCKED' ? (
-                    <p style={{ fontStyle: 'italic' }}>You will not have access to a 4th perk.</p>
+                    <p className="italic">You will not have access to a 4th perk.</p>
                 ) : (
-                    <p style={{ fontStyle: 'italic' }}>The 4th perk will be randomized at the start of each match.</p>
+                    <p className="italic">The 4th perk will be randomized at the start of each match.</p>
                 )}
-                <p style={{ fontStyle: 'italic' }}></p>
+                <p className="italic"></p>
                 <div className="inputButtonsContainer">
                     {/* Blocked - Empty Slot, Not Playable */}
                     <button

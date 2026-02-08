@@ -1,3 +1,5 @@
+import type {EconomyItem} from "./GameData.ts";
+
 export interface SeasonModel {
     userId: number;
     id: number;
@@ -42,6 +44,9 @@ export interface VariantFeatures {
     // OPTIONS FOR BLOOD MONEY
     readonly hasShop?: boolean;          // Enables the "Blood Money" shop UI
     readonly startingCurrency?: number;  // Optional: Only needed if hasShop is true
+    readonly activePenalties?: EconomyItem[];
+    readonly activeBonuses?: EconomyItem[];
+    readonly coolDown?: boolean;
 
     // OPTIONS FOR ROULETTE
     readonly hasRandomizer?: boolean;    // Enables the "Spin Wheel" UI
@@ -121,7 +126,7 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
         description: 'Make it from Ash 4 to Iridescent 1 before running out of killers or before going bankrupt.',
         difficulty: 'HARD',
         rules: [
-            'Starting Funds: You begin the season with $50 or a value of your choice.',
+            'Starting Funds: You begin the season with $25, $0, or a value of your choice.',
             'Pay-to-Play: You must purchase every perk you wish to use for a specific trial.',
             'Income: You earn money based on your performance.',
             'Penalties: You can loose money based on your performance.',
@@ -135,7 +140,7 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
         features: {
             permadeath: true,
             winCondition: 'STANDARD_3K',
-            startingCurrency: 50,
+            startingCurrency: 25,
             hasShop: true
         }
     },

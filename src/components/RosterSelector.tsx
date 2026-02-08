@@ -7,12 +7,10 @@ interface RosterSelectorProps {
 
     // Blood Money Logic
     showCosts?: boolean;
-    editCosts?: boolean;
     costs?: Record<string, number>;
-    onCostChange?: (id: string, newCost: number) => void;
 }
 
-export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showCosts, editCosts, costs, onCostChange }: RosterSelectorProps) => {
+export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showCosts, costs }: RosterSelectorProps) => {
 
     const activeList = limitToCharacters || KILLER_ROSTER;
 
@@ -40,7 +38,7 @@ export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showC
 
             {/* Disclaimer */}
             {!limitToCharacters && (
-                <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span style={{ fontStyle: 'italic' }}>Either you haven't bought the character yet, or DBD disabled them.</span></p>
+                <p><span className="oswald">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span className="italic">Either you haven't bought the character yet, or DBD disabled them.</span></p>
             )}
 
             <div className="rosterList">
@@ -60,13 +58,7 @@ export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showC
                             {/* Shows the price tag for Blood Money */}
                             {showCosts && (
                                 <div className="priceTag">
-                                    {editCosts ? (
-                                        <input className="priceTagInput" type="number" value={currentCost} onChange={(e) => onCostChange?.(character.id, Number(e.target.value))}/>
-                                    ) : (
-                                        <span>
-                                            ${currentCost}
-                                        </span>
-                                    )}
+                                    <span>${currentCost}</span>
                                 </div>
                             )}
 

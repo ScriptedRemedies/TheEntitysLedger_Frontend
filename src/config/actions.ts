@@ -1,6 +1,7 @@
 import {BackendService} from "../services/backend.ts";
 import {redirect} from "react-router-dom";
 import {SEASON_VARIANTS, type VariantFeatures} from "../models/SeasonModel.ts";
+import {BLOOD_MONEY_BONUSES, BLOOD_MONEY_PENALTIES} from "../models/GameData.ts";
 
 export const startSeasonAction = async ({ request }: { request: Request }) => {
     // Grabs the form data from the UI
@@ -21,11 +22,24 @@ export const startSeasonAction = async ({ request }: { request: Request }) => {
             break;
 
         case 'BLOOD_MONEY':
-            variantSettings = {
-                // We grab the input named "custom_difficulty" from BloodMoney.tsx
-                startingCurrency: formData.get("custom_difficulty") === 'hardcore' ? 0 : 50
-            };
-            break;
+            {
+                const penaltyString = formData.get("penalties") as string;
+                const penaltyIds = penaltyString ? penaltyString.split(',') : [];
+                const activePenalties = BLOOD_MONEY_PENALTIES.filter(p => penaltyIds.includes(p.id));
+
+                const bonusString = formData.get("bonuses") as string;
+                const bonusIds = bonusString ? bonusString.split(',') : [];
+                const activeBonuses = BLOOD_MONEY_BONUSES.filter(b => bonusIds.includes(b.id));
+
+                variantSettings = {
+                    // We grab the input named "custom_difficulty" from BloodMoney.tsx
+                    startingCurrency: Number(formData.get("startingAmount")),
+                    activePenalties: activePenalties,
+                    activeBonuses: activeBonuses,
+                    coolDown: formData.get("coolDown") === 'true'
+                };
+                break;
+            }
 
         // 'CLASSIC' and 'BASE_GAME' need no extra settings, so they stay empty {}
     }
