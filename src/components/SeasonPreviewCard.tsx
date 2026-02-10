@@ -57,6 +57,8 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                 // Getting the grade name
                 const gradeName = PlayerGrades.getGradeNameFromPips(season.pip);
 
+                const progress = PlayerGrades.getGradeProgress(season.pip);
+
                 return (
                     <div
                         key={season.id}
@@ -78,12 +80,12 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                             <p>Current Season</p>
                         ) : (
                             season.result === "PASSED" ? (
-                                <p className="oswald">PASSED</p>
+                                <p className="scribble">PASSED</p>
                             ) : (
-                                <p className="oswald">FAILED</p>
+                                <p className="scribble">FAILED</p>
                             )
                         )}
-                        <p>Total Pips: {season.pip}</p>
+                        <p>Pips: {progress.current}</p>
                     </div>
                 )
             })}

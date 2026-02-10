@@ -1,5 +1,6 @@
 import type {UserModel} from "../models/UserModel.ts";
 import {Outlet, useLoaderData, useLocation, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export const RootLayout = () => {
     // Grab the user
@@ -9,14 +10,55 @@ export const RootLayout = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
+
     // Helper to determine which buttons to show
     const renderHeaderActions = () => {
         const path = location.pathname;
+        const searchParams = new URLSearchParams(location.search);
+        const activeTab = searchParams.get('tab') || 'matches';
+
+        // SCENARIO : On the "Season Details" page and on the matches page
+        if (path.startsWith('/season/') && path !== '/season/new' && activeTab === 'matches') {
+            return (
+                <div className="navButtonContainer">
+                    <button
+                        className="button dbdButton"
+                        onClick={() => navigate(-1)}
+                    >
+                        Back
+                    </button>
+
+                    {/* Submit */}
+                    <button
+                        type="submit"
+                        form="match-form"
+                        className="button dbdButton"
+                    >
+                        Record Match
+                    </button>
+                </div>
+            )
+        }
+
+        // SCENARIO : On the "Season Details" page and not on the matches page
+        if (path.startsWith('/season/') && path !== '/season/new' && activeTab !== 'matches') {
+            return (
+                <button
+                    className="button dbdButton"
+                    onClick={() => navigate(-1)}
+                >
+                    Back
+                </button>
+            )
+        }
 
         // SCENARIO : On the "Start Season" page
         if (path === '/season/new' || path === '/start') {
             return (
-                <div style={{ display: 'flex', gap: '20px' }}>
+                <div className="navButtonContainer">
                     <button
                         className="button dbdButton"
                         onClick={() => navigate(-1)}
@@ -24,8 +66,7 @@ export const RootLayout = () => {
                         Cancel
                     </button>
 
-                    {/* This button lives in the header,
-                        but submits the form in the child component using the ID */}
+                    {/* Submits the form in the child component using the ID */}
                     <button
                         type="submit"
                         form="season-form"

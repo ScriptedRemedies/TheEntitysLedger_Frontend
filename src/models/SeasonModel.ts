@@ -7,6 +7,7 @@ export interface SeasonModel {
     playerName: string;
     platform: string;
     variantId: string;
+    availableRoster: string[];
     matches: [];
     badge: string;
     pip: number;
@@ -106,11 +107,11 @@ export const SEASON_VARIANTS: readonly SeasonVariant[] = [
         difficulty: 'NORMAL',
         rules: [
             'Perk Limit: You start with 4 perk slots at Ash grade. You lose one perk slot for every grade color you advance (Ash: 4, Bronze: 3, Silver: 2, Gold: 1, Iridescent: 0).',
-            'Add-ons: Add-ons are generally permitted unless you wish to play on "Hard Mode" (no add-ons allowed).',
+            'Add-ons: Add-ons are permitted.',
             'Win Condition: A "Win" is a 3K (three kills) or 4K.',
             'Loss Condition: A 2K or fewer or any exits through an exit gate is a loss.',
             'Permadeath: If the loss condition is met, the killer used in that trial is eliminated and cannot be used again.',
-            'Hatch Exception: If one survivor escapes through the hatch, it is not considered a loss. However, if two or more escape through the hatch, the killer is eliminated.',
+            'Hatch Exception: If the last survivor escapes through the hatch, it is not considered a loss.',
             'Roster Limit: You may only use the original 5 Killers.'
         ],
         features: {

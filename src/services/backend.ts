@@ -1,6 +1,7 @@
 import {API_BASE_URL} from "../config/api.ts";
 import type {SeasonModel, CreateSeasonRequest} from "../models/SeasonModel.ts";
 import type {UserModel} from "../models/UserModel.ts";
+import type {CreateMatchRequest} from "../models/MatchModel.ts";
 
 // Handles repetitive "check response.ok" and "parse json"
 async function request<T>(endpoint: string): Promise<T> {
@@ -37,7 +38,7 @@ export const BackendService = {
     },
 
     // CREATE A MATCH
-    createMatch: async (matchData: never) => {
+    createMatch: async (matchData: CreateMatchRequest) => {
         const response = await fetch(`${API_BASE_URL}/matches`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

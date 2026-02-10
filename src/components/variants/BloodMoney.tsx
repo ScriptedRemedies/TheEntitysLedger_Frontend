@@ -50,7 +50,7 @@ export const BloodMoney = () => {
 
             {/* Starting Amount */}
             <div className="dbdFormGroup">
-                <h5>Starting Amount: <span className="oswald">${getFinalAmount()}</span></h5>
+                <h5>Starting Amount: <span className="scribble">${getFinalAmount()}</span></h5>
                 <p className="italic"> Choose how much money you start the season with.</p>
                 <div className="inputButtonsContainer">
                     <button
@@ -89,7 +89,7 @@ export const BloodMoney = () => {
 
             {/* Penalty Options */}
             <div className="dbdFormGroup">
-                <h5>Penalties (<span className="oswald">{penalty.length} Selected</span>)</h5>
+                <h5>Penalties (<span className="scribble">{penalty.length} Selected</span>)</h5>
                 <p className="italic">Money that will be deducted if the condition is met. Deselect any you do not want to apply.</p>
                 <div className="inputButtonsContainer">
                     <ul className="economyItemList">
@@ -101,7 +101,7 @@ export const BloodMoney = () => {
                                     className={`button dbdInputButton ${isSelected ? 'selectedButton' : ''}`}
                                     onClick={() => togglePenalty(p.id)}>
                                     <div className="economyItemTitle">
-                                        <p className="oswald">{p.name}</p>
+                                        <p className="scribble">{p.name}</p>
                                         <p className="priceTag">${p.cost}</p>
                                     </div>
                                     <p>{p.description}</p>
@@ -114,7 +114,7 @@ export const BloodMoney = () => {
 
             {/* Bonus Money Options */}
             <div className="dbdFormGroup">
-                <h5>Bonuses (<span className="oswald">{bonus.length} Selected</span>)</h5>
+                <h5>Bonuses (<span className="scribble">{bonus.length} Selected</span>)</h5>
                 <p className="italic">Money that will be added if the condition is met. Deselect any you do not want to apply.</p>
                 <div className="inputButtonsContainer">
                     <ul className="economyItemList">
@@ -126,7 +126,7 @@ export const BloodMoney = () => {
                                     className={`button dbdInputButton ${isSelected ? 'selectedButton' : ''}`}
                                     onClick={() => toggleBonus(b.id)}>
                                     <div className="economyItemTitle">
-                                        <p className="oswald">{b.name}</p>
+                                        <p className="scribble">{b.name}</p>
                                         <p className="priceTag">$+{b.cost}</p>
                                     </div>
                                     {b.description}
@@ -139,7 +139,7 @@ export const BloodMoney = () => {
 
             {/* Killer cooldown option, either Yes on cool down or No, describe what the cooldown is */}
             <div className="dbdFormGroup">
-                <h5>Cooldown: <span className="oswald">{coolDown}</span></h5>
+                <h5>Cooldown: <span className="scribble">{coolDown}</span></h5>
                 <p className="italic">When cooldown is on, you will not be allowed to use the same killer more then 2 times in a row.</p>
                 <div className="inputButtonsContainer">
                     <button

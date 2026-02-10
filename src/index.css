@@ -23,7 +23,6 @@
 .oswald {
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
-  color: var(--red);
 }
 /* Annotations or "crossing out" a dead character */
 .scribble {

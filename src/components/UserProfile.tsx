@@ -9,6 +9,10 @@ export const UserProfile = () => {
     return (
         <div className="userProfile componentContainer">
             <h2 className="special-elite">Hello {user.name}, the Entity awaits...</h2>
+
+            {/* TODO: put the killer vs survivor buttons that switches the view */}
+
+            {/* TODO: make it a list of killer seasons and survivor seasons */}
             <div className="seasonPreviewCardContainer">
                 <SeasonPreviewCard userId={user.id}/>
             </div>

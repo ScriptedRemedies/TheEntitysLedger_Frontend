@@ -36,7 +36,7 @@ export const StartSeason = () => {
 
     return (
         <div className="componentContainer">
-            <h1>Start a new Season</h1>
+            <h2 className="special-elite">Start a new Season</h2>
 
             <Form method="post" className="form" id="season-form">
                 {/* Silently sends the user id */}
@@ -101,7 +101,7 @@ export const StartSeason = () => {
 
                     {/* Player Role Selection */}
                     <div className="dbdFormGroup">
-                        <h4>Pick Your Role: <span className="oswald">{selectedPR === 'KILLER' ? 'KILLER' : 'SURVIVOR'}</span></h4>
+                        <h4>Pick Your Role: <span className="scribble">{selectedPR === 'KILLER' ? 'KILLER' : 'SURVIVOR'}</span></h4>
                         <div className="inputButtonsContainer">
                             {/* Killer */}
                             <button
@@ -141,7 +141,7 @@ export const StartSeason = () => {
 
                             {/* Season Variant Rules */}
                             <h5>Difficulty Level</h5>
-                            <p className="oswald">{activeVariantInfo.difficulty}</p>
+                            <p className="scribble">{activeVariantInfo.difficulty}</p>
                             <h5>Objective</h5>
                             <p>{activeVariantInfo.description}</p>
                             <h4>{activeVariantInfo.name} Rules</h4>
@@ -159,7 +159,7 @@ export const StartSeason = () => {
 
                                     return (
                                         <li key={index}>
-                                            <span className="ruleTitle oswald">{title}:</span><br/><span className="ruleDescription">{description}</span>
+                                            <span className="ruleTitle scribble">{title}:</span><br/><span className="ruleDescription">{description}</span>
                                         </li>
                                     );
                                 })}

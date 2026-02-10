@@ -16,7 +16,7 @@ export const Adept = () => {
             <input type="hidden" name="fourthPerkOption" value={selectedOption}/>
 
             <div className="dbdFormGroup">
-                <h5>4th Perk Setting: <span className="oswald">{selectedOption}</span></h5>
+                <h5>4th Perk Setting: <span className="scribble">{selectedOption}</span></h5>
                 {selectedOption === 'BLOCKED' ? (
                     <p className="italic">You will not have access to a 4th perk.</p>
                 ) : (
