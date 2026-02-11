@@ -7,7 +7,6 @@ export interface CreateMatchRequest {
     perkIds: string[];
 
     kills?: number;
-    isMerciless?: boolean;
     result?: 'WIN' | 'LOSS';
 
     economySpent?: number;

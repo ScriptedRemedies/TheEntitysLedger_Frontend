@@ -3,6 +3,14 @@ import type {SeasonModel, CreateSeasonRequest} from "../models/SeasonModel.ts";
 import type {UserModel} from "../models/UserModel.ts";
 import type {CreateMatchRequest} from "../models/MatchModel.ts";
 
+interface UpdateSeasonProgressRequest {
+    seasonId: number;
+    newPipTotal: number;
+    deadCharacterId: string | null;
+    isComplete: boolean;
+    result: 'PASSED' | 'FAILED' | 'ONGOING';
+}
+
 // Handles repetitive "check response.ok" and "parse json"
 async function request<T>(endpoint: string): Promise<T> {
     const response = await fetch(`${API_BASE_URL}${endpoint}`);
@@ -34,6 +42,18 @@ export const BackendService = {
             body: JSON.stringify(seasonData)
         })
         if (!response.ok) throw new Error('Failed to start season');
+        return response.json();
+    },
+
+    // UPDATE A SEASON
+    updateSeasonProgress: async (progressData: UpdateSeasonProgressRequest) => {
+        const response = await fetch(`${API_BASE_URL}/seasons/${progressData.seasonId}/progress`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(progressData)
+        });
+
+        if (!response.ok) throw new Error('Failed to update season progress');
         return response.json();
     },
 
