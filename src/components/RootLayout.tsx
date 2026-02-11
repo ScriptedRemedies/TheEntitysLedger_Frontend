@@ -26,7 +26,7 @@ export const RootLayout = () => {
                 <div className="navButtonContainer">
                     <button
                         className="button dbdButton"
-                        onClick={() => navigate(-1)}
+                        onClick={() => navigate('')}
                     >
                         Back
                     </button>
@@ -48,7 +48,7 @@ export const RootLayout = () => {
             return (
                 <button
                     className="button dbdButton"
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('')}
                 >
                     Back
                 </button>
