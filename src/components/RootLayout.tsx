@@ -55,6 +55,32 @@ export const RootLayout = () => {
             )
         }
 
+        // SCENARIO : On the "Season Recap" page
+        if (path.startsWith('/season/') && path.endsWith('recap')) {
+            return (
+                <button
+                    className="button dbdButton"
+                    // Goes back to the home page
+                    onClick={() => navigate('')}
+                >
+                    Back
+                </button>
+            )
+        }
+
+        // SCENARIO : On the "Match Recap" page
+        if (path.startsWith('matches') && path.endsWith('recap')) {
+            return (
+                <button
+                    className="button dbdButton"
+                    // Only go back 1 since the recap of a match can only be accessed through a season
+                    onClick={() => navigate(-1)}
+                >
+                    Back
+                </button>
+            )
+        }
+
         // SCENARIO : On the "Start Season" page
         if (path === '/season/new' || path === '/start') {
             return (

@@ -6,6 +6,7 @@ import {RootLayout} from "./components/RootLayout.tsx";
 import {rootLoader, seasonLoader} from "./config/loaders.ts";
 import {StartSeason} from "./components/StartSeason.tsx";
 import {startSeasonAction} from "./config/actions.ts";
+import {SeasonRecap} from "./components/SeasonRecap.tsx";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
             {
                 path: "season/:id",
                 element: <SeasonDetail />,
+                loader: seasonLoader
+            },
+            {
+                path: "season/:id/recap",
+                element: <SeasonRecap />,
                 loader: seasonLoader
             },
             {

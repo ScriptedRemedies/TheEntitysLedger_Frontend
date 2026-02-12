@@ -63,29 +63,57 @@ export const SeasonPreviewCard = ({ userId }: SeasonProps) => {
                     <div
                         key={season.id}
                         className="seasonPreviewCard dbdCard cardHover"
-                        onClick={() => {navigate(`/season/${season.id}`)}}>
-                        <h4>{variantDisplayName}</h4>
-                        <p>{season.platform}</p>
-                        <div className="grade">
-                            <p className="englishSC">{PlayerGrades.getRomanGradeName(season.pip)}</p>
-                            <img src={gradeImageUrl} alt={gradeName}/>
+                        onClick={() => {
+                            if (season.isCurrent) {
+                                navigate(`/season/${season.id}`);
+                            } else {
+                                navigate(`/season/${season.id}/recap`);
+                            }
+                        }}>
+
+                        {/* Variant type, role, matches played */}
+                        <div>
+                            <h4>{variantDisplayName}</h4>
+                            <p>{season.playerRole}</p>
+                            <p>Matches Played: {season.matches?.length || 0}</p>
                         </div>
 
-                        <p>{season.playerRole}</p>
-                        <p>{season.playerName}</p>
-                        <p>{PlayerGrades.getGradeNameFromPips(season.pip)}</p>
-
-                        <p>Matches Played: {season.matches?.length || 0}</p>
-                        {season.isCurrent ? (
-                            <p>Current Season</p>
-                        ) : (
-                            season.result === "PASSED" ? (
-                                <p className="scribble">PASSED</p>
+                        {/* Platform, player name, season status */}
+                        <div>
+                            <p>{season.platform}</p>
+                            <p>{season.playerName}</p>
+                            {season.isCurrent ? (
+                                <p>Current Season</p>
                             ) : (
-                                <p className="scribble">FAILED</p>
-                            )
-                        )}
-                        <p>Pips: {progress.current}</p>
+                                season.result === "PASSED" ? (
+                                    <p className="scribble">PASSED</p>
+                                ) : (
+                                    <p className="scribble">FAILED</p>
+                                )
+                            )}
+                        </div>
+
+                        {/* Grade display */}
+                        <div>
+                            <div className="gradeDisplay">
+                                {/* Badge */}
+                                <div className="grade">
+                                    <p className="englishSC">{PlayerGrades.getRomanGradeName(season.pip)}</p>
+                                    <img src={gradeImageUrl} alt={gradeName}/>
+                                </div>
+                                {/* Pips */}
+                                <div className="pipContainer">
+                                    {Array.from({ length: progress.max }).map((_, index) => (
+                                        <div
+                                            key={index}
+                                            className={`pip ${index < progress.current ? 'filled' : ''}`}
+                                        >
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <p>{gradeName}</p>
+                        </div>
                     </div>
                 )
             })}
