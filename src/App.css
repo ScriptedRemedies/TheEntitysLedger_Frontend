@@ -58,6 +58,15 @@ main {
     grid-template-columns: 110px auto;
     gap: 20px;
 }
+.seasonRecapContainer {
+    width: 90%;
+    align-self: center;
+    margin-top: 20px;
+
+    h2 {
+        align-self: start;
+    }
+}
 /* The menu on the left hand side that chooses the view */
 .menu {
     display: flex;

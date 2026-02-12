@@ -20,6 +20,19 @@ export const RootLayout = () => {
         const searchParams = new URLSearchParams(location.search);
         const activeTab = searchParams.get('tab') || 'matches';
 
+        // SCENARIO : On the "Season Recap" page
+        if (path.startsWith('/season/') && path.endsWith('recap')) {
+            return (
+                <button
+                    className="button dbdButton"
+                    // Goes back to the home page
+                    onClick={() => navigate('')}
+                >
+                    Back
+                </button>
+            )
+        }
+
         // SCENARIO : On the "Season Details" page and on the matches page
         if (path.startsWith('/season/') && path !== '/season/new' && activeTab === 'matches') {
             return (
@@ -48,19 +61,6 @@ export const RootLayout = () => {
             return (
                 <button
                     className="button dbdButton"
-                    onClick={() => navigate('')}
-                >
-                    Back
-                </button>
-            )
-        }
-
-        // SCENARIO : On the "Season Recap" page
-        if (path.startsWith('/season/') && path.endsWith('recap')) {
-            return (
-                <button
-                    className="button dbdButton"
-                    // Goes back to the home page
                     onClick={() => navigate('')}
                 >
                     Back

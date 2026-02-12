@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {BackendService} from '../services/backend.ts';
-import {SEASON_VARIANTS, type SeasonModel} from "../models/SeasonModel.ts";
-import {PlayerGrades} from '../models/PlayerGrades.ts';
+import {BackendService} from '../../services/backend.ts';
+import {SEASON_VARIANTS, type SeasonModel} from "../../models/SeasonModel.ts";
+import {PlayerGrades} from '../../models/PlayerGrades.ts';
 
 // Defining what props will be accepted
 interface SeasonProps {
