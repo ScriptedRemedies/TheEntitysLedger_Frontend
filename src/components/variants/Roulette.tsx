@@ -1,4 +1,4 @@
-import {RosterSelector} from "../RosterSelector.tsx";
+import {RosterSelector} from "../smallComponents/RosterSelector.tsx";
 import {KILLER_ROSTER} from "../../models/GameData.ts";
 import {useState} from "react";
 

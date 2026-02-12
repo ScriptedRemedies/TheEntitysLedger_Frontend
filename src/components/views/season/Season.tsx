@@ -1,10 +1,10 @@
 import {useLoaderData, useSearchParams} from 'react-router-dom';
-import {type SeasonModel} from "../models/SeasonModel.ts";
-import {StartMatchView} from "./StartMatchView.tsx";
-import {TitleAndGrade} from "./smallComponents/TitleAndGrade.tsx";
-import {SeasonRules} from "./smallComponents/SeasonRules.tsx";
+import {type SeasonModel} from "../../../models/SeasonModel.ts";
+import {StartMatchView} from "../../secondaryViews/StartMatchView.tsx";
+import {TitleAndGrade} from "../../smallComponents/TitleAndGrade.tsx";
+import {SeasonRules} from "../../smallComponents/SeasonRules.tsx";
 
-export const SeasonDetail = () => {
+export const Season = () => {
 
     // STATE : hold the season data if we have it, if not starts as null
     const { season } = useLoaderData() as { season: SeasonModel };

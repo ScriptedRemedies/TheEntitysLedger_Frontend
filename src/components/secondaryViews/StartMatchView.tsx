@@ -1,12 +1,12 @@
 // src/components/match/StartMatchView.tsx
 import {useState} from "react";
-import {ClassicMatchForm} from "./variants/ClassicMatchForm.tsx";
-import {ClassicResultForm} from "./variants/ClassicResultForm.tsx";
-import type {SeasonModel} from "../models/SeasonModel.ts";
-import type {CreateMatchRequest, MatchLoadout} from "../models/MatchModel.ts";
-import {BackendService} from "../services/backend.ts";
+import {ClassicMatchForm} from "../variants/MatchForms/ClassicMatchForm.tsx";
+import {ClassicResultForm} from "../variants/ResultForms/ClassicResultForm.tsx";
+import type {SeasonModel} from "../../models/SeasonModel.ts";
+import type {CreateMatchRequest, MatchLoadout} from "../../models/MatchModel.ts";
+import {BackendService} from "../../services/backend.ts";
 import {Form, useNavigate} from "react-router-dom";
-import {PlayerGrades} from "../models/PlayerGrades.ts";
+import {PlayerGrades} from "../../models/PlayerGrades.ts";
 
 // Map IDs to Components
 const VARIANT_FORMS: Record<string, React.FC<any>> = {

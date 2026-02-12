@@ -1,8 +1,8 @@
-import type {UserModel} from "../models/UserModel.ts";
+import type {UserModel} from "../../models/UserModel.ts";
 import {Outlet, useLoaderData, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
-export const RootLayout = () => {
+export const HeaderNav = () => {
     // Grab the user
     const { user } = useLoaderData() as { user: UserModel };
 

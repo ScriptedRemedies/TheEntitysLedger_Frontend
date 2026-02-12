@@ -1,8 +1,8 @@
-import {SeasonPreviewCard} from "./smallComponents/SeasonPreviewCard.tsx";
-import type {UserModel} from "../models/UserModel.ts";
+import {SeasonPreviewCard} from "../../smallComponents/SeasonPreviewCard.tsx";
+import type {UserModel} from "../../../models/UserModel.ts";
 import {useOutletContext} from "react-router-dom";
 
-export const UserProfile = () => {
+export const ListOfSeasons = () => {
     // STATE : hold user data
     const { user } = useOutletContext<{ user: UserModel}>();
 

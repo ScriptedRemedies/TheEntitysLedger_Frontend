@@ -1,28 +1,22 @@
-import {KILLER_PERKS} from "../models/GameData.ts";
-import {useMemo, useState} from "react";
+import {type Character, KILLER_ROSTER} from "../../models/GameData.ts";
+import {useState} from "react";
 
-interface PerkSelectorProps {
+interface RosterSelectorProps {
     selectedIds: string[];
     onChange: (ids: string[]) => void;
+    limitToCharacters?: Character[];
 
-    // Blood Money
+    // Blood Money Logic
     showCosts?: boolean;
     costs?: Record<string, number>;
-    readonly?: boolean; // Disables the clicking that happens with dbd buttons
-
-    // Adept
-    // Receives the ownerId from killer_roster to then filter through killer_perks to list perks under that killer
-    filterByCharacter?: string;
 }
 
-export const PerkSelector = ({selectedIds, onChange, showCosts, costs, filterByCharacter, readonly}: PerkSelectorProps) => {
+export const RosterSelector = ({ selectedIds, onChange, limitToCharacters, showCosts, costs }: RosterSelectorProps) => {
+
+    const activeList = limitToCharacters || KILLER_ROSTER;
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 16;
-
-    const activeList = useMemo(() => {
-        return [...KILLER_PERKS].sort((a, b) => a.name.localeCompare(b.name));
-    }, []);
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -31,49 +25,50 @@ export const PerkSelector = ({selectedIds, onChange, showCosts, costs, filterByC
 
     const changePage = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const togglePerk = (id: string) => {
+    const toggleCharacter = (id: string) => {
         if (selectedIds.includes(id)) {
-            onChange(selectedIds.filter(x => x != id));
+            onChange(selectedIds.filter(x => x != id)); // Remove it from list
         } else {
             onChange([...selectedIds, id]);
         }
     };
 
     return (
-        <div className="perkSelectorContainer">
+        <div className="rosterSelectorContainer">
+
+            {/* Disclaimer */}
+            {!limitToCharacters && (
+                <p><span className="scribble">WARNING: </span>The characters that are selected when season starts cannot be changed. Deselect any characters you do not have access to in DBD. <br/><span className="italic">Either you haven't bought the character yet, or DBD disabled them.</span></p>
+            )}
+
             <div className="rosterList">
-                {currentItems.map((perk) => {
-                    const isSelected = selectedIds.includes(perk.id);
-                    const currentCost = costs?.[perk.id] ?? perk.cost;
+                {currentItems.map((character) => {
+                    const isSelected = selectedIds.includes(character.id);
+                    const currentCost = costs?.[character.id] ?? character.cost;
 
                     return (
                         <div
-                            key={perk.id}
+                            key={character.id}
                             onClick={(e) => {
-                                if (readonly) return;
-
                                 if ((e.target as HTMLElement).tagName !== 'INPUT') {
-                                    togglePerk(perk.id);
+                                    toggleCharacter(character.id);
                                 }
                             }}
-                            className={`button dbdInputButton ${isSelected ? 'selectedButton' : ''}`}
-                            style={{ cursor: readonly ? 'default' : 'pointer' }}>
-
+                            className={`button dbdInputButton ${isSelected ? 'selectedButton' : ''}`}>
+                            {/* Shows the price tag for Blood Money */}
                             {showCosts && (
                                 <div className="priceTag">
                                     <span>${currentCost}</span>
                                 </div>
                             )}
 
-                            {/* Image here */}
-                            <img src={`/assets/killerPerks/${perk.id.toLowerCase()}.png`} alt={perk.name}/>
-                            <p>{perk.name}</p>
+                            <img src={`/assets/killerPortraits/${character.id.toLowerCase()}.png`} alt={character.name}/>
+                            <p>{character.name}</p>
                         </div>
-                    )
+                    );
                 })}
             </div>
 
-            {/* PAGINATION CONTROLS */}
             {totalPages > 1 && (
                 <div className="inputButtonsContainer">
                     <button
@@ -85,6 +80,7 @@ export const PerkSelector = ({selectedIds, onChange, showCosts, costs, filterByC
                         Prev
                     </button>
 
+                    {/* Page Numbers */}
                     {Array.from({ length: totalPages }, (_, i) => (
                         <button
                             key={i + 1}

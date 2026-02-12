@@ -1,7 +1,7 @@
 import {BLOOD_MONEY_BONUSES, BLOOD_MONEY_PENALTIES, KILLER_PERKS, KILLER_ROSTER} from "../../models/GameData.ts";
-import {RosterSelector} from "../RosterSelector.tsx";
+import {RosterSelector} from "../smallComponents/RosterSelector.tsx";
 import {useState} from "react";
-import {PerkSelector} from "../PerkSelector.tsx";
+import {PerkSelector} from "../smallComponents/PerkSelector.tsx";
 
 export const BloodMoney = () => {
     // STATE : tracks the selected states of the options

@@ -1,8 +1,8 @@
-import type {MatchLoadout} from "../../models/MatchModel.ts";
-import {KILLER_ROSTER, KILLER_PERKS} from "../../models/GameData.ts";
+import type {MatchLoadout} from "../../../models/MatchModel.ts";
+import {KILLER_ROSTER, KILLER_PERKS} from "../../../models/GameData.ts";
 import {useEffect, useState} from "react";
-import {RosterSelector} from "../RosterSelector.tsx";
-import {PerkSelector} from "../PerkSelector.tsx";
+import {RosterSelector} from "../../smallComponents/RosterSelector.tsx";
+import {PerkSelector} from "../../smallComponents/PerkSelector.tsx";
 
 interface ClassicMatchFormProps {
     availableRoster: string[];

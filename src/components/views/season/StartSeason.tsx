@@ -1,13 +1,13 @@
 import {Form, useOutletContext} from "react-router-dom";
-import type {UserModel} from "../models/UserModel.ts";
+import type {UserModel} from "../../../models/UserModel.ts";
 import {useState} from "react";
-import {SEASON_VARIANTS} from "../models/SeasonModel.ts";
-import {BloodMoney} from "./variants/BloodMoney.tsx";
-import {Classic} from "./variants/Classic.tsx";
-import {Roulette} from "./variants/Roulette.tsx";
-import {IronMan} from "./variants/IronMan.tsx";
-import {Adept} from "./variants/Adept.tsx";
-import {BaseGame} from "./variants/BaseGame.tsx";
+import {SEASON_VARIANTS} from "../../../models/SeasonModel.ts";
+import {BloodMoney} from "../../variants/BloodMoney.tsx";
+import {Classic} from "../../variants/Classic.tsx";
+import {Roulette} from "../../variants/Roulette.tsx";
+import {IronMan} from "../../variants/IronMan.tsx";
+import {Adept} from "../../variants/Adept.tsx";
+import {BaseGame} from "../../variants/BaseGame.tsx";
 
 const VARIANT_VIEWS: Record<string, React.FC> = {
     'CLASSIC': Classic,

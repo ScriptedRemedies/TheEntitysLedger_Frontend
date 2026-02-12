@@ -1,26 +1,26 @@
 import './App.css'
-import {UserProfile} from "./components/UserProfile.tsx";
+import {ListOfSeasons} from "./components/views/season/ListOfSeasons.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {SeasonDetail} from "./components/SeasonDetail.tsx";
-import {RootLayout} from "./components/RootLayout.tsx";
+import {Season} from "./components/views/season/Season.tsx";
+import {HeaderNav} from "./components/smallComponents/HeaderNav.tsx";
 import {rootLoader, seasonLoader} from "./config/loaders.ts";
-import {StartSeason} from "./components/StartSeason.tsx";
+import {StartSeason} from "./components/views/season/StartSeason.tsx";
 import {startSeasonAction} from "./config/actions.ts";
-import {SeasonRecap} from "./components/SeasonRecap.tsx";
+import {SeasonRecap} from "./components/views/season/SeasonRecap.tsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <RootLayout />,
+        element: <HeaderNav />,
         loader: rootLoader,
         children: [
             {
                 index: true, // "Default page"
-                element: <UserProfile />
+                element: <ListOfSeasons />
             },
             {
                 path: "season/:id",
-                element: <SeasonDetail />,
+                element: <Season />,
                 loader: seasonLoader
             },
             {

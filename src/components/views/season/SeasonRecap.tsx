@@ -1,6 +1,6 @@
 import {useLoaderData} from "react-router-dom";
-import type {SeasonModel} from "../models/SeasonModel.ts";
-import {SeasonRules} from "./smallComponents/SeasonRules.tsx";
+import type {SeasonModel} from "../../../models/SeasonModel.ts";
+import {SeasonRules} from "../../smallComponents/SeasonRules.tsx";
 
 export const SeasonRecap = () => {
     const { season } = useLoaderData() as { season: SeasonModel };
